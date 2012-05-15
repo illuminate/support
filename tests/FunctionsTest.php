@@ -20,4 +20,12 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 		$this->assertFalse(str_is('foo', 'bar'));
 	}
 
+
+	public function testValue()
+	{
+		Illuminate\Support\Helpers::register();
+		$this->assertEquals('foo', value('foo'));
+		$this->assertEquals('foo', value(function() { return 'foo'; }));
+	}
+
 }
