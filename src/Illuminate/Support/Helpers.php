@@ -9,7 +9,7 @@ class Helpers {
 	 */
 	public static function register()
 	{
-		require_once __DIR__.'/functions.php';
+		require_once __DIR__.'/Functions.php';
 	}
 
 }
