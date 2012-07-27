@@ -1,10 +1,9 @@
 <?php
 
-class FunctionsTest extends PHPUnit_Framework_TestCase {
+class HelpersTest extends PHPUnit_Framework_TestCase {
 
 	public function testArrayDot()
 	{
-		Illuminate\Support\Helpers::register();
 		$array = array_dot(array('name' => 'taylor', 'languages' => array('php' => true)));
 		$this->assertEquals($array, array('name' => 'taylor', 'languages.php' => true));
 	}
@@ -12,7 +11,6 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 
 	public function testStrIs()
 	{
-		Illuminate\Support\Helpers::register();
 		$this->assertTrue(str_is('*.dev', 'localhost.dev'));
 		$this->assertTrue(str_is('a', 'a'));
 		$this->assertTrue(str_is('*dev*', 'localhost.dev'));
@@ -23,7 +21,6 @@ class FunctionsTest extends PHPUnit_Framework_TestCase {
 
 	public function testValue()
 	{
-		Illuminate\Support\Helpers::register();
 		$this->assertEquals('foo', value('foo'));
 		$this->assertEquals('foo', value(function() { return 'foo'; }));
 	}
