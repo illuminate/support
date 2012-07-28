@@ -12,6 +12,6 @@
     },
     "autoload": {
         "psr-0": {"Illuminate\\Support": "src/"},
-        "files": ["../src/helpers.php"]
+        "files": ["src/helpers.php"]
     }
 }
