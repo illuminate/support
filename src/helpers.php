@@ -112,6 +112,75 @@ function array_forget(&$array, $key)
 }
 
 /**
+ * Divide an array into two arrays. One with keys and the other with values.
+ *
+ * @param  array  $array
+ * @return array
+ */
+function array_divide($array)
+{
+	return array(array_keys($array), array_values($array));
+}
+
+/**
+ * Return the first element in an array passing a given truth test.
+ *
+ * @param  array    $array
+ * @param  Closure  $callback
+ * @param  mixed    $default
+ * @return mixed
+ */
+function array_first($array, $callback, $default = null)
+{
+	foreach ($array as $key => $value)
+	{
+		if (call_user_func($callback, $key, $value)) return $value;
+	}
+
+	return value($default);
+}
+
+/**
+ * Pluck an array of values from an array.
+ *
+ * @param  array   $array
+ * @param  string  $key
+ * @return array
+ */
+function array_pluck($array, $key)
+{
+	return array_map(function($v) use ($key)
+	{
+		return is_object($v) ? $v->$key : $v[$key];
+
+	}, $array);
+}
+
+/**
+ * Get a subset of the items from the given array.
+ *
+ * @param  array  $array
+ * @param  array  $keys
+ * @return array
+ */
+function array_only($array, $keys)
+{
+	return array_intersect_key($array, array_flip((array) $keys));
+}
+
+/**
+ * Get all of the given array except for a specified array of items.
+ *
+ * @param  array  $array
+ * @param  array  $keys
+ * @return array
+ */
+function array_except($array, $keys)
+{
+	return array_diff_key($array, array_flip((array) $keys));
+}
+
+/**
  * Determine if a string starts with a given needle.
  *
  * @param  string  $haystack
@@ -121,6 +190,23 @@ function array_forget(&$array, $key)
 function starts_with($haystack, $needle)
 {
 	return strpos($haystack, $needle) === 0;
+}
+
+/**
+ * Determine if a given string contains a given sub-string.
+ *
+ * @param  string        $haystack
+ * @param  string|array  $needle
+ * @return bool
+ */
+function str_contains($haystack, $needle)
+{
+	foreach ((array) $needle as $n)
+	{
+		if (strpos($haystack, $n) !== false) return true;
+	}
+
+	return false;
 }
 
 /**
