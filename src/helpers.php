@@ -243,3 +243,16 @@ function value($value)
 {
 	return $value instanceof Closure ? $value() : $value;
 }
+
+/**
+ * Dump and die, var_dump the value and die().
+ *
+ * @param  mixed  $value
+ * @return void
+ */
+function dd($value)
+{
+	echo '<pre>';
+	var_dump($value);
+	die('</pre>');
+}
