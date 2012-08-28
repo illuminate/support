@@ -89,6 +89,18 @@ class HelpersTest extends PHPUnit_Framework_TestCase {
 	}
 
 
+	public function testSnakeCase()
+	{
+		$this->assertEquals('foo_bar', snake_case('fooBar'));
+	}
+
+
+	public function testCamelCase()
+	{
+		$this->assertEquals('FooBar', camel_case('foo_bar'));
+	}
+
+
 	public function testValue()
 	{
 		$this->assertEquals('foo', value('foo'));

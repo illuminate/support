@@ -181,6 +181,19 @@ function array_except($array, $keys)
 }
 
 /**
+ * Get the class "basename" of the given object / class.
+ *
+ * @param  string|object  $class
+ * @return string
+ */
+function class_basename($class)
+{
+	$class = is_object($class) ? get_class($class) : $class;
+
+	return basename(str_replace('\\', '/', $class));
+}
+
+/**
  * Determine if a string starts with a given needle.
  *
  * @param  string  $haystack
@@ -234,6 +247,34 @@ function str_is($pattern, $value)
 }
 
 /**
+ * Convert a string to snake case.
+ *
+ * @param  string  $value
+ * @return string
+ */
+function snake_case($value)
+{
+	return trim(preg_replace_callback('/[A-Z]/', function($match)
+	{
+		return '_'.strtolower($match[0]);
+
+	}, $value), '_');
+}
+
+/**
+ * Convert a value to camel case.
+ *
+ * @param  string  $value
+ * @return string
+ */
+function camel_case($value)
+{
+	$value = ucwords(str_replace('_', ' ', $value));
+
+	return str_replace(' ', '', $value);
+}
+
+/**
  * Return the default value of the given value.
  *
  * @param  mixed  $value
@@ -245,14 +286,12 @@ function value($value)
 }
 
 /**
- * Dump and die, var_dump the value and die().
+ * Dump and die; var_dump the value and die().
  *
  * @param  mixed  $value
  * @return void
  */
 function dd($value)
 {
-	echo '<pre>';
-	var_dump($value);
-	die('</pre>');
+	die(var_dump($value));
 }
