@@ -82,6 +82,20 @@ class HelpersTest extends PHPUnit_Framework_TestCase {
 	}
 
 
+	public function testStartsWith()
+	{
+		$this->assertTrue(starts_with('jason', 'jas'));
+		$this->assertFalse(starts_with('jason', 'day'));
+	}
+
+
+	public function testEndsWith()
+	{
+		$this->assertTrue(ends_with('jason', 'on'));
+		$this->assertFalse(ends_with('jason', 'no'));
+	}
+
+
 	public function testStrContains()
 	{
 		$this->assertTrue(str_contains('taylor', 'ylo'));
