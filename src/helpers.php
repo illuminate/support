@@ -206,6 +206,18 @@ function starts_with($haystack, $needle)
 }
 
 /**
+ * Determine if a given string ends with a given needle.
+ *
+ * @param string $haystack
+ * @param string $needle
+ * @return bool
+ */
+function ends_with($haystack, $needle)
+{
+	return $needle == substr($haystack, strlen($haystack) - strlen($needle));
+}
+
+/**
  * Determine if a given string contains a given sub-string.
  *
  * @param  string        $haystack
