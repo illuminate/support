@@ -208,13 +208,25 @@ function starts_with($haystack, $needle)
 /**
  * Determine if a given string ends with a given needle.
  *
- * @param string $haystack
- * @param string $needle
+ * @param  string  $haystack
+ * @param  string  $needle
  * @return bool
  */
 function ends_with($haystack, $needle)
 {
 	return $needle == substr($haystack, strlen($haystack) - strlen($needle));
+}
+
+/**
+ * Cap a string with a single instance of the given string.
+ *
+ * @param  string  $value
+ * @param  string  $cap
+ * @return string
+ */
+function str_finish($value, $cap)
+{
+	return rtrim($value, $cap).$cap;
 }
 
 /**
