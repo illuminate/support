@@ -252,10 +252,10 @@ function str_is($pattern, $value)
 	}
 	else
 	{
-		$pattern = '^/$';
+		$pattern = '/$';
 	}
 
-	return (bool) preg_match('#'.$pattern.'#', $value);
+	return (bool) preg_match('#^'.$pattern.'#', $value);
 }
 
 /**
