@@ -90,7 +90,7 @@ abstract class Manager {
 	 */
 	protected function callCustomCreator($driver)
 	{
-		return $this->customCreators[$driver]($app);
+		return $this->customCreators[$driver]($this->app);
 	}
 
 	/**
