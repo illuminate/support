@@ -63,9 +63,7 @@ abstract class ServiceProvider {
 		// registering the paths to every package's views and other components.
 		if ($app['files']->isDirectory($view = $path.'/views'))
 		{
-			$views = $app['view']->driver($this->viewEngine);
-
-			$views->addNamespace($package, $view);
+			$app['view']->addNamespace($package, $view);
 		}
 	}
 
