@@ -36,7 +36,7 @@ class NamespacedItemResolver {
 		}
 		else
 		{
-			$parsed = $this->parseNamespacedSegments($segments);
+			$parsed = $this->parseNamespacedSegments($key);
 		}
 
 		// Once we have the parsed array of this key's elements, such as its groups
@@ -77,30 +77,21 @@ class NamespacedItemResolver {
 	/**
 	 * Parse an array of namespaced segments.
 	 *
-	 * @param  array  $segments
+	 * @param  string  $key
 	 * @return array
 	 */
-	protected function parseNamespacedSegments(array $segments)
+	protected function parseNamespacedSegments($key)
 	{
+		list($namespace, $item) = explode('::', $key);
+
 		// First we'll just explode the first segment to get the namespace and group
 		// since the item should be in the remaining segments. Once we have these
 		// two pieces of data we can proceed wtih parsing out the item's value.
-		list($namespace, $group) = explode('::', $segments[0]);
+		$itemSegments = explode('.', $item);
 
-		if (count($segments) == 1)
-		{
-			$item = null;
-		}
+		$groupAndItem = array_slice($this->parseBasicSegments($itemSegments), 1);
 
-		// If there is more than one segment in the array, it means an item has been
-		// specified. So we'll slice the group and namespace off of the array and
-		// join the rest of the segments using dots to get the item name values.
-		elseif (count($segments) > 1)
-		{
-			$item = implode('.', array_slice($segments, 1));
-		}
-
-		return array($namespace, $group, $item);
+		return array_merge(array($namespace), $groupAndItem);
 	}
 
 	/**
