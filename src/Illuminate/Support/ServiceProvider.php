@@ -3,20 +3,6 @@
 abstract class ServiceProvider {
 
 	/**
-	 * The view engine used by the package's views.
-	 *
-	 * @var string
-	 */
-	protected $viewEngine = 'php';
-
-	/**
-	 * Indicates if the service provider is deferred.
-	 *
-	 * @var bool
-	 */
-	protected $defer = false;
-
-	/**
 	 * Bootstrap the application events.
 	 *
 	 * @param  Illuminate\Foundation\Application  $app
@@ -40,7 +26,7 @@ abstract class ServiceProvider {
 	 * @param  string  $path
 	 * @return void
 	 */
-	public function registerComponents($app, $vendor, $package, $path)
+	public function package($app, $vendor, $package, $path)
 	{
 		// In this method we will register the configuration package for the package
 		// so that the configuration options cleanly cascade into the application
@@ -65,26 +51,6 @@ abstract class ServiceProvider {
 		{
 			$app['view']->addNamespace($package, $view);
 		}
-	}
-
-	/**
-	 * Get the services provided by the provider.
-	 *
-	 * @return array
-	 */
-	public function getProvidedServices()
-	{
-		return array();
-	}
-
-	/**
-	 * Determine if the service provider defers registration.
-	 *
-	 * @return bool
-	 */
-	public function isDeferred()
-	{
-		return $this->defer;
 	}
 
 }
