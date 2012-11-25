@@ -3,54 +3,98 @@
 abstract class ServiceProvider {
 
 	/**
-	 * Bootstrap the application events.
+	 * The application instance.
+	 *
+	 * @var Illuminate\Foundation\Application
+	 */
+	protected $app;
+
+	/**
+	 * Create a new service provider instance.
 	 *
 	 * @param  Illuminate\Foundation\Application  $app
 	 * @return void
 	 */
-	public function boot($app) {}
+	public function __construct($app)
+	{
+		$this->app = $app;
+	}
+
+	/**
+	 * Bootstrap the application events.
+	 *
+	 * @return void
+	 */
+	public function boot() {}
 
 	/**
 	 * Register the service provider.
 	 *
-	 * @param  Illuminate\Foundation\Application  $app
 	 * @return void
 	 */
-	abstract public function register($app);
+	abstract public function register();
 
 	/**
 	 * Register the package's component namespaces.
 	 *
-	 * @param  Illuminate\Foundation\Application  $app
 	 * @param  string  $package
 	 * @param  string  $path
 	 * @return void
 	 */
-	public function package($app, $vendor, $package, $path)
+	public function package($package, $path)
 	{
+		list($vendor, $name) = explode('/', $package);
+
 		// In this method we will register the configuration package for the package
 		// so that the configuration options cleanly cascade into the application
 		// folder to make the developers lives much easier in maintaining them.
-		if ($app['files']->isDirectory($config = $path.'/config'))
+		$config = $path.'/config';
+
+		if ($this->app['files']->isDirectory($config))
 		{
-			$app['config']->package($vendor.'/'.$package, $config);
+			$this->app['config']->package($package, $config);
 		}
 
 		// Next we will check for any "language" components. If language files exist
 		// we will register them with this given package's namespace so that they
 		// may be accessed using the translation facilities of the application.
-		if ($app['files']->isDirectory($lang = $path.'/lang'))
+		$lang = $path.'/lang';
+
+		if ($this->app['files']->isDirectory($lang))
 		{
-			$app['translator']->addNamespace($package, $lang);
+			$this->app['translator']->addNamespace($name, $lang);
 		}
 
 		// Finally we will register the view namespace so that we can access each of
 		// the views available in this package. We use a standard convention when
 		// registering the paths to every package's views and other components.
-		if ($app['files']->isDirectory($view = $path.'/views'))
+		$view = $path.'/views';
+
+		if ($this->app['files']->isDirectory($view))
 		{
-			$app['view']->addNamespace($package, $view);
+			$this->app['view']->addNamespace($name, $view);
 		}
+	}
+
+	/**
+	 * Register the package's custom Artisan commands.
+	 *
+	 * @param  dynamic  string
+	 * @return void
+	 */
+	public function commands()
+	{
+		$commands = func_get_args();
+
+		// To register the commands with Artisan, we will grab each of the arguments
+		// passed into the method and listen for Artisan "start" event which will
+		// give us the Artisan console instance which we will give commands to.
+		$events = $this->app['events'];
+
+		$events->listen('artisan.start', function($artisan) use ($commands)
+		{
+			$artisan->resolveCommands($commands);
+		});
 	}
 
 }
