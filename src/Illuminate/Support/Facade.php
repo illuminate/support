@@ -10,9 +10,9 @@ abstract class Facade {
 	protected static $app;
 
 	/**
-	 * The resolved object instance.
+	 * The resolved object instances.
 	 *
-	 * @var mixed
+	 * @var array
 	 */
 	protected static $resolvedInstance;
 
@@ -36,12 +36,12 @@ abstract class Facade {
 	{
 		if (is_object($name)) return $name;
 
-		if (isset(static::$resolvedInstance))
+		if (isset(static::$resolvedInstance[$name]))
 		{
-			return static::$resolvedInstance;
+			return static::$resolvedInstance[$name];
 		}
 
-		return static::$resolvedInstance = static::$app[$name];
+		return static::$resolvedInstance[$name] = static::$app[$name];
 	}
 
 	/**
@@ -74,9 +74,7 @@ abstract class Facade {
 	 */
 	public static function __callStatic($method, $args)
 	{
-		$name = static::getFacadeAccessor();
-
-		$instance = static::resolveFacadeInstance($name);
+		$instance = static::resolveFacadeInstance(static::getFacadeAccessor());
 
 		switch (count($args))
 		{
