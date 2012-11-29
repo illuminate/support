@@ -10,6 +10,13 @@ abstract class ServiceProvider {
 	protected $app;
 
 	/**
+	 * Indicates if loading of the provider is deferred.
+	 *
+	 * @var bool
+	 */
+	protected $defer = false;
+
+	/**
 	 * Create a new service provider instance.
 	 *
 	 * @param  Illuminate\Foundation\Application  $app
@@ -95,6 +102,26 @@ abstract class ServiceProvider {
 		{
 			$artisan->resolveCommands($commands);
 		});
+	}
+
+	/**
+	 * Get the services provided by the provider.
+	 *
+	 * @return array
+	 */
+	protected function provides()
+	{
+		return array();
+	}
+
+	/**
+	 * Determine if the provider is deferred.
+	 *
+	 * @return bool
+	 */
+	protected function isDeferred()
+	{
+		return $this->deferred;
 	}
 
 }
