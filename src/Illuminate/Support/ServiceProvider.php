@@ -121,7 +121,7 @@ abstract class ServiceProvider {
 	 */
 	public function isDeferred()
 	{
-		return $this->deferred;
+		return $this->defer;
 	}
 
 }
