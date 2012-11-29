@@ -109,7 +109,7 @@ abstract class ServiceProvider {
 	 *
 	 * @return array
 	 */
-	protected function provides()
+	public function provides()
 	{
 		return array();
 	}
@@ -119,7 +119,7 @@ abstract class ServiceProvider {
 	 *
 	 * @return bool
 	 */
-	protected function isDeferred()
+	public function isDeferred()
 	{
 		return $this->deferred;
 	}
