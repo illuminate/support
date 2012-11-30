@@ -46,11 +46,12 @@ abstract class ServiceProvider {
 	 *
 	 * @param  string  $package
 	 * @param  string  $path
+	 * @param  string  $namespace
 	 * @return void
 	 */
-	public function package($package, $path)
+	public function package($package, $path, $namespace = null)
 	{
-		list($vendor, $name) = explode('/', $package);
+		$namespace = $this->getPackageNamespace($package, $namespace);
 
 		// In this method we will register the configuration package for the package
 		// so that the configuration options cleanly cascade into the application
@@ -59,7 +60,7 @@ abstract class ServiceProvider {
 
 		if ($this->app['files']->isDirectory($config))
 		{
-			$this->app['config']->package($package, $config);
+			$this->app['config']->package($package, $config, $namespace);
 		}
 
 		// Next we will check for any "language" components. If language files exist
@@ -69,7 +70,7 @@ abstract class ServiceProvider {
 
 		if ($this->app['files']->isDirectory($lang))
 		{
-			$this->app['translator']->addNamespace($name, $lang);
+			$this->app['translator']->addNamespace($namespace, $lang);
 		}
 
 		// Finally we will register the view namespace so that we can access each of
@@ -79,8 +80,25 @@ abstract class ServiceProvider {
 
 		if ($this->app['files']->isDirectory($view))
 		{
-			$this->app['view']->addNamespace($name, $view);
+			$this->app['view']->addNamespace($namespace, $view);
 		}
+	}
+
+	/**
+	 * Determine the namespace for a package.
+	 *
+	 * @param  string  $package
+	 * @param  string  $namespace
+	 * @return string
+	 */
+	protected function getPackageNamespace($package, $namespace)
+	{
+		if (is_null($namespace))
+		{
+			list($vendor, $namespace) = explode('/', $package);
+		}
+
+		return $namespace;
 	}
 
 	/**
