@@ -112,6 +112,7 @@ class HelpersTest extends PHPUnit_Framework_TestCase {
 	public function testCamelCase()
 	{
 		$this->assertEquals('FooBar', camel_case('foo_bar'));
+		$this->assertEquals('FooBarBaz', camel_case('foo-bar_baz'));
 	}
 
 

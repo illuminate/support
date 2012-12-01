@@ -281,7 +281,7 @@ function snake_case($value)
  */
 function camel_case($value)
 {
-	$value = ucwords(str_replace('_', ' ', $value));
+	$value = ucwords(str_replace(array('-', '_'), ' ', $value));
 
 	return str_replace(' ', '', $value);
 }
