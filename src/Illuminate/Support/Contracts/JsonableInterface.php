@@ -1,4 +1,4 @@
-<?php namespace Illuminate\Support;
+<?php namespace Illuminate\Support\Contracts;
 
 interface JsonableInterface {
 
