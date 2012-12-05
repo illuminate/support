@@ -10,7 +10,7 @@ class FacadeTest extends PHPUnit_Framework_TestCase {
 
 }
 
-class FacadeStub extends Illuminate\Support\Facade {
+class FacadeStub extends Illuminate\Support\Facades\Facade {
 
 	/**
 	 * Get the registered name of the component.

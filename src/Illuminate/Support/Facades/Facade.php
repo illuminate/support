@@ -1,4 +1,4 @@
-<?php namespace Illuminate\Support;
+<?php namespace Illuminate\Support\Facades;
 
 abstract class Facade {
 
@@ -15,6 +15,16 @@ abstract class Facade {
 	 * @var array
 	 */
 	protected static $resolvedInstance;
+
+	/**
+	 * Get the root object behind the facade.
+	 *
+	 * @return mixed
+	 */
+	public static function getFacadeRoot()
+	{
+		return static::resolveFacadeInstance(static::getFacadeAccessor());
+	}
 
 	/**
 	 * Get the registered name of the component.
