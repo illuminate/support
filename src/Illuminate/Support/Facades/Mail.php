@@ -1,7 +1,5 @@
 <?php namespace Illuminate\Support\Facades;
 
-use Illuminate\Support\Facade;
-
 class Mail extends Facade {
 
 	/**
