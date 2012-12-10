@@ -54,6 +54,43 @@ abstract class Facade {
 		return static::$resolvedInstance[$name] = static::$app[$name];
 	}
 
+    /**
+     * Get resolved instance(s)
+     *
+     * @param  string  $name
+     * @return mixed
+     */
+    public static function getResolvedInstance($name = null)
+    {
+        if (is_null($name)) return static::$resolvedInstance;
+
+        if (isset(static::$resolvedInstance[$name]))
+        {
+            return static::$resolvedInstance[$name];
+        }
+
+        return null;
+    }
+
+    /**
+     * Remove resolved instance(s)
+     *
+     * @param  string  $name
+     * @return array
+     */
+    public static function removeResolvedInstance($name = null)
+    {
+        if (is_null($name)) {
+            return static::$resolvedInstance = array();
+        }
+
+        if (isset(static::$resolvedInstance[$name])) {
+            unset(static::$resolvedInstance[$name]);
+
+            return static::$resolvedInstance;
+        }
+    }
+
 	/**
 	 * Get the application instance behind the facade.
 	 *
