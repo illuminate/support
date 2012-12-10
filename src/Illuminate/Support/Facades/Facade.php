@@ -55,6 +55,16 @@ abstract class Facade {
 	}
 
 	/**
+	 * Clear all of the resolved instances.
+	 *
+	 * @return void
+	 */
+	public static function clearResolvedInstances()
+	{
+		static::$resolvedInstance = array();
+	}
+
+	/**
 	 * Get the application instance behind the facade.
 	 *
 	 * @return Illuminate\Foundation\Application
