@@ -76,6 +76,7 @@ class HelpersTest extends PHPUnit_Framework_TestCase {
 	{
 		$this->assertTrue(str_is('*.dev', 'localhost.dev'));
 		$this->assertTrue(str_is('a', 'a'));
+		$this->assertTrue(str_is('/', '/'));
 		$this->assertTrue(str_is('*dev*', 'localhost.dev'));
 		$this->assertFalse(str_is('*something', 'foobar'));
 		$this->assertFalse(str_is('foo', 'bar'));
