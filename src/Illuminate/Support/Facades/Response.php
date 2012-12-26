@@ -41,4 +41,17 @@ class Response {
 		return new \Symfony\Component\HttpFoundation\StreamedResponse($callback, $status, $headers);
 	}
 
+	/**
+	 * Create a new file download response.
+	 *
+	 * @param  SplFileInfo|string  $file
+	 * @param  int  $status
+	 * @param  array  $headers
+	 * @return Symfony\Component\HttpFoundation\BinaryFileResponse
+	 */
+	public static function download($file, $status = 200, $headers = array())
+	{
+		return new \Symfony\Component\HttpFoundation\BinaryFileResponse($file, $status, $headers);
+	}
+
 }
