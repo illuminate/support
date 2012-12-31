@@ -70,13 +70,13 @@ abstract class Manager {
 		// We'll check to see if a creator method exists for the given driver. If not we
 		// will check for a custom driver creator, which allows developers to create
 		// drivers using their own customized driver creator Closure to create it.
-		if (method_exists($this, $method))
-		{
-			return $this->$method();
-		}
-		elseif (isset($this->customCreators[$driver]))
+		if (isset($this->customCreators[$driver]))
 		{
 			return $this->callCustomCreator($driver);
+		}
+		elseif (method_exists($this, $method))
+		{
+			return $this->$method();
 		}
 
 		throw new \InvalidArgumentException("Driver [$driver] not supported.");
