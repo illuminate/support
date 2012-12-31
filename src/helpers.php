@@ -388,6 +388,18 @@ function starts_with($haystack, $needle)
 }
 
 /**
+ * Cap a string with a single instance of the given string.
+ *
+ * @param  string  $value
+ * @param  string  $cap
+ * @return string
+ */
+function str_finish($value, $cap)
+{
+	return rtrim($value, $cap).$cap;
+}
+
+/**
  * Determine if a given string contains a given sub-string.
  *
  * @param  string        $haystack
