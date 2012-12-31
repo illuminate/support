@@ -86,7 +86,7 @@ class NamespacedItemResolver {
 
 		// First we'll just explode the first segment to get the namespace and group
 		// since the item should be in the remaining segments. Once we have these
-		// two pieces of data we can proceed wtih parsing out the item's value.
+		// two pieces of data we can proceed with parsing out the item's value.
 		$itemSegments = explode('.', $item);
 
 		$groupAndItem = array_slice($this->parseBasicSegments($itemSegments), 1);
