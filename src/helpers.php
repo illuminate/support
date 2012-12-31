@@ -292,7 +292,7 @@ function csrf_token()
  */
 function dd($value)
 {
-	die(var_dump($value));
+	die(call_user_func_array('var_dump', func_get_args()));
 }
 
 /**
