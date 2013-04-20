@@ -140,7 +140,7 @@ class MessageBag implements ArrayableInterface, Countable, JsonableInterface, Me
 
 		foreach ($this->messages as $key => $messages)
 		{
-			$all = array_merge($all, $this->transform($messages, $format, $key));
+			$all[] = $this->transform($messages, $format, $key);
 		}
 
 		return $all;
