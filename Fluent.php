@@ -5,6 +5,15 @@ use JsonSerializable;
 use Illuminate\Support\Contracts\JsonableInterface;
 use Illuminate\Support\Contracts\ArrayableInterface;
 
+/**
+ * @method nullable()
+ * @method unsigned()
+ * @method default($value)
+ * @method onUpdate($value)
+ * @method onDelete($value)
+ * @method references($value)
+ * @method on($value)
+ */
 class Fluent implements ArrayAccess, ArrayableInterface, JsonableInterface, JsonSerializable {
 
 	/**
