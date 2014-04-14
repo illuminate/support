@@ -6,13 +6,13 @@ use Illuminate\Support\Contracts\JsonableInterface;
 use Illuminate\Support\Contracts\ArrayableInterface;
 
 /**
- * @method nullable()
- * @method unsigned()
- * @method default($value)
- * @method onUpdate($value)
- * @method onDelete($value)
- * @method references($value)
- * @method on($value)
+ * @method Fluent nullable()
+ * @method Fluent unsigned()
+ * @method Fluent default($value)
+ * @method Fluent onUpdate($value)
+ * @method Fluent onDelete($value)
+ * @method Fluent references($value)
+ * @method Fluent on($value)
  */
 class Fluent implements ArrayAccess, ArrayableInterface, JsonableInterface, JsonSerializable {
 
