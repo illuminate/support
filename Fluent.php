@@ -8,6 +8,7 @@ use Illuminate\Support\Contracts\ArrayableInterface;
 /**
  * @method Fluent nullable()
  * @method Fluent unsigned()
+ * @method Fluent unique()
  * @method Fluent default($value)
  * @method Fluent onUpdate($value)
  * @method Fluent onDelete($value)
