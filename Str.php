@@ -245,7 +245,7 @@ class Str
      */
     public static function randomBytes($length = 16)
     {
-        if (PHP_MAJOR_VERSION >= 7) {
+        if (function_exists('random_bytes')) {
             $bytes = random_bytes($length);
         } elseif (function_exists('openssl_random_pseudo_bytes')) {
             $bytes = openssl_random_pseudo_bytes($length, $strong);
