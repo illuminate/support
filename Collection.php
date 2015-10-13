@@ -986,10 +986,9 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     public function offsetGet($key)
     {
-        if (!empty($this->items)){
+        if (!is_null($this->items)) {
             return $this->items[$key];
-        }
-        else{
+        } else {
             return null;
         }
     }
