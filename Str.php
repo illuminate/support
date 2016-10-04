@@ -149,16 +149,30 @@ class Str
      * @param  string  $value
      * @param  int     $limit
      * @param  string  $end
+     * @param  bool    $fullWord
      * @return string
      */
-    public static function limit($value, $limit = 100, $end = '...')
-    {
-        if (mb_strwidth($value, 'UTF-8') <= $limit) {
-            return $value;
-        }
+     public static function limit($value, $limit = 100, $end = '...', $fullWord = false)
+     {
+         if (mb_strwidth($value, 'UTF-8') <= $limit) {
+             return $value;
+         }
 
-        return rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')).$end;
-    }
+         $sentense = rtrim(mb_strimwidth($value, 0, $limit, '', 'UTF-8')).$end;
+
+         if (!$fullWord) {
+             return $sentense;
+         }
+         $newLimit = mb_strpos($value, ' ', $limit);
+         if ($newLimit !== false) {
+             $sentense = rtrim(mb_strimwidth($value, 0, $newLimit, '', 'UTF-8')).$end;
+         }
+         if (mb_strwidth($value, 'UTF-8') <= $newLimit) {
+             return $value;
+         }
+
+         return $sentense;
+     }
 
     /**
      * Convert the given string to lower-case.
