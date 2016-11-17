@@ -15,6 +15,13 @@ class QueueFake implements Queue
     protected $jobs = [];
 
     /**
+     * The total amount of jobs that have been pushed.
+     *
+     * @var int
+     */
+    protected $size = 0;
+
+    /**
      * Assert if a job was pushed based on a truth-test callback.
      *
      * @param  string  $job
@@ -119,7 +126,7 @@ class QueueFake implements Queue
      */
     public function size($queue = null)
     {
-        return 0;
+        return $this->size;
     }
 
     /**
@@ -132,10 +139,14 @@ class QueueFake implements Queue
      */
     public function push($job, $data = '', $queue = null)
     {
-        $this->jobs[get_class($job)][] = [
+        $job = is_object($job) ? get_class($job) : $job;
+
+        $this->jobs[$job][] = [
             'job' => $job,
             'queue' => $queue,
         ];
+        
+        $this->size++;
     }
 
     /**
