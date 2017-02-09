@@ -33,7 +33,7 @@ class Str
      * Transliterate a UTF-8 value to ASCII.
      *
      * @param  string  $value
-     * @return string
+     * @return mixed
      */
     public static function ascii($value)
     {
