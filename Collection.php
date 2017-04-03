@@ -627,6 +627,19 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     }
 
     /**
+     * Determine if the collection is not empty, execute callback
+     *
+     * @param callable $callback
+     * @return mixed
+     */
+    public function isNotEmptyAction(callable $callback)
+    {
+        if ( $this->isNotEmpty() )
+        {
+            return call_user_func($callback, new static( $this->items ) );
+        }
+    }
+    /**
      * Determine if the given value is callable, but not a string.
      *
      * @param  mixed  $value
