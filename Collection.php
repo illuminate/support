@@ -1691,16 +1691,20 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     {
         if (is_array($items)) {
             return $items;
-        } elseif ($items instanceof self) {
-            return $items->all();
-        } elseif ($items instanceof Arrayable) {
-            return $items->toArray();
-        } elseif ($items instanceof Jsonable) {
-            return json_decode($items->toJson(), true);
-        } elseif ($items instanceof JsonSerializable) {
-            return $items->jsonSerialize();
-        } elseif ($items instanceof Traversable) {
-            return iterator_to_array($items);
+        }
+
+        switch (get_class($items))
+        {
+            case get_class(self::class):
+                return $items->all();
+            case get_class(Jsonable::class):
+                return json_decode($items->toJson(), true);
+            case get_class(Arrayable::class):
+                return $items->toArray();
+            case get_class(JsonSerializable::class):
+                return $items->jsonSerialize();
+            case get_class(Traversable::class):
+                return iterator_to_array($items);
         }
 
         return (array) $items;
