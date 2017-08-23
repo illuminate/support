@@ -833,6 +833,21 @@ if (! function_exists('str_limit')) {
     }
 }
 
+if ( ! function_exists('str_words') ) {
+    /**
+     * Limit the number of words in a string.
+     *
+     * @param  string  $value
+     * @param  int     $words
+     * @param  string  $end
+     * @return string
+     */
+    function str_words($value, $words = 100, $end = '...')
+    {
+        return Str::words($value, $words, $end);
+    }
+}
+
 if (! function_exists('str_plural')) {
     /**
      * Get the plural form of an English word.
