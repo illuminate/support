@@ -634,9 +634,8 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
      */
     public function isNotEmptyAction(callable $callback)
     {
-        if ( $this->isNotEmpty() )
-        {
-            return call_user_func($callback, new static( $this->items ) );
+        if ($this->isNotEmpty() {
+            return call_user_func($callback, new static($this->items ));
         }
     }
     /**
