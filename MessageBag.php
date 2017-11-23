@@ -34,7 +34,8 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
     public function __construct(array $messages = [])
     {
         foreach ($messages as $key => $value) {
-            $this->messages[$key] = (array) $value;
+            $this->messages[$key] = $value instanceof Arrayable
+                    ? $value->toArray() : (array) $value;
         }
     }
 
@@ -121,11 +122,13 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
     /**
      * Determine if messages exist for any of the given keys.
      *
-     * @param  array  $keys
+     * @param  array|string  $keys
      * @return bool
      */
     public function hasAny($keys = [])
     {
+        $keys = is_array($keys) ? $keys : func_get_args();
+
         foreach ($keys as $key) {
             if ($this->has($key)) {
                 return true;
@@ -317,6 +320,16 @@ class MessageBag implements Arrayable, Countable, Jsonable, JsonSerializable, Me
     public function isEmpty()
     {
         return ! $this->any();
+    }
+
+    /**
+     * Determine if the message bag has any messages.
+     *
+     * @return bool
+     */
+    public function isNotEmpty()
+    {
+        return $this->any();
     }
 
     /**

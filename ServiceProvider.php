@@ -81,8 +81,12 @@ abstract class ServiceProvider
      */
     protected function loadViewsFrom($path, $namespace)
     {
-        if (is_dir($appPath = $this->app->resourcePath().'/views/vendor/'.$namespace)) {
-            $this->app['view']->addNamespace($namespace, $appPath);
+        if (is_array($this->app->config['view']['paths'])) {
+            foreach ($this->app->config['view']['paths'] as $viewPath) {
+                if (is_dir($appPath = $viewPath.'/vendor/'.$namespace)) {
+                    $this->app['view']->addNamespace($namespace, $appPath);
+                }
+            }
         }
 
         $this->app['view']->addNamespace($namespace, $path);
@@ -98,6 +102,17 @@ abstract class ServiceProvider
     protected function loadTranslationsFrom($path, $namespace)
     {
         $this->app['translator']->addNamespace($namespace, $path);
+    }
+
+    /**
+     * Register a JSON translation file path.
+     *
+     * @param  string  $path
+     * @return void
+     */
+    protected function loadJsonTranslationsFrom($path)
+    {
+        $this->app['translator']->addJsonPath($path);
     }
 
     /**
@@ -203,7 +218,7 @@ abstract class ServiceProvider
     }
 
     /**
-     * Get the paths for the provdider and group.
+     * Get the paths for the provider and group.
      *
      * @param  string  $provider
      * @param  string  $group
