@@ -742,6 +742,20 @@ if (! function_exists('preg_replace_array')) {
     }
 }
 
+if (! function_exists('readable_filesize')) {
+    /**
+    * Returns a human readable filesize by given integer of filesize in bytes.
+    * @param  int $size
+    * @return string
+    */
+    function readable_filesize($size)
+    {
+        $units = array('B', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+        $power = $size > 0 ? floor(log($size, 1024)) : 0;
+        return number_format($size / pow(1024, $power), 2, '.', ',') . ' ' . $units[$power];
+    }
+}
+
 if (! function_exists('retry')) {
     /**
      * Retry an operation a given number of times.
