@@ -214,7 +214,7 @@ class Arr
             if (! is_array($item)) {
                 $result[] = $item;
             } elseif ($depth === 1) {
-                $result = array_merge($result, array_values($item));
+                $result = array_merge($result, $item);
             } else {
                 $result = array_merge($result, static::flatten($item, $depth - 1));
             }
