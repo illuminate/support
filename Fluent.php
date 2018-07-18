@@ -7,6 +7,22 @@ use JsonSerializable;
 use Illuminate\Contracts\Support\Jsonable;
 use Illuminate\Contracts\Support\Arrayable;
 
+/**
+ * Class Fluent
+ * @package Illuminate\Support
+ * @method Fluent after(string $column)
+ * @method Fluent autoIncrement()
+ * @method Fluent charset(string $charset)
+ * @method Fluent collation(string $collation)
+ * @method Fluent comment(string $comment)
+ * @method Fluent default($value)
+ * @method Fluent first()
+ * @method Fluent nullable($value = true)
+ * @method Fluent storedAs($expression)
+ * @method Fluent unsigned()
+ * @method Fluent useCurrent()
+ * @method Fluent virtualAs($expression)
+ */
 class Fluent implements ArrayAccess, Arrayable, Jsonable, JsonSerializable
 {
     /**
