@@ -148,7 +148,11 @@ class Arr
             return $array->offsetExists($key);
         }
 
-        return array_key_exists($key, $array);
+        if (is_string($key) || is_int($key)) {
+            return array_key_exists($key, $array);
+        }
+
+        return false;
     }
 
     /**
