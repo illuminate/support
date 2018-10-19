@@ -172,7 +172,7 @@ class Collection implements ArrayAccess, Arrayable, Countable, IteratorAggregate
     /**
      * Get the median of a given key.
      *
-     * @param  null $key
+     * @param  mixed $key
      * @return mixed
      */
     public function median($key = null)
