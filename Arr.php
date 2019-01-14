@@ -377,7 +377,7 @@ class Arr
     {
         $results = [];
 
-        [$value, $key] = static::explodePluckParameters($value, $key);
+        list($value, $key) = static::explodePluckParameters($value, $key);
 
         foreach ($array as $item) {
             $itemValue = data_get($item, $value);
