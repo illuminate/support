@@ -542,7 +542,7 @@ class Arr
             shuffle($array);
         } else {
             // Seed the random number generator to guarantee the order in which the
-            // array is shuffled.  Then, after the shuffling is down, reset the
+            // array is shuffled.  Then, after the shuffling is done, reset the
             // seed randomly to prevent biases in future random methods.
             mt_srand($seed);
             shuffle($array);
