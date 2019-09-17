@@ -127,7 +127,7 @@ if (! function_exists('data_fill')) {
 
 if (! function_exists('data_get')) {
     /**
-     * Get an item from an array or object using "dot" notation.
+     * Get an item from an array or object using dot notation.
      *
      * @param  mixed   $target
      * @param  string|array|int  $key
@@ -307,7 +307,7 @@ if (! function_exists('last')) {
 
 if (! function_exists('object_get')) {
     /**
-     * Get an item from an object using "dot" notation.
+     * Get an item from an object using dot notation.
      *
      * @param  object  $object
      * @param  string  $key
