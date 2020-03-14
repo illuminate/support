@@ -166,13 +166,21 @@ class Str
 
     /**
      * Determine if a given string contains a given substring.
+     * When case_sensitive is false, convert all parameters to lower case.
      *
      * @param  string  $haystack
      * @param  string|string[]  $needles
+     * @param  bool $case_sensitive
      * @return bool
      */
-    public static function contains($haystack, $needles)
+    public static function contains($haystack, $needles, $case_sensitive = true )
     {
+        if( ! $case_sensitive )
+        {
+            $haystack = strtoupper( $haystack );
+            $needles = array_map( 'strtoupper', (array) $needles);
+        }
+        
         foreach ((array) $needles as $needle) {
             if ($needle !== '' && mb_strpos($haystack, $needle) !== false) {
                 return true;
