@@ -45,6 +45,16 @@ class Env
     }
 
     /**
+     * Get the indication, if putenv is enabled.
+     *
+     * @return bool
+     */
+    public static function getPutenv()
+    {
+        return self::$putenv;
+    }
+
+    /**
      * Get the environment repository instance.
      *
      * @return \Dotenv\Repository\RepositoryInterface
