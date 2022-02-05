@@ -35,7 +35,10 @@ class MessageBag implements Jsonable, JsonSerializable, MessageBagContract, Mess
         foreach ($messages as $key => $value) {
             $value = $value instanceof Arrayable ? $value->toArray() : (array) $value;
 
-            $this->messages[$key] = array_unique($value);
+            if(is_array($value))
+                $this->messages[$key] = $value;
+            else
+                $this->messages[$key] = array_unique($value);
         }
     }
 
