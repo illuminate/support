@@ -827,6 +827,19 @@ class Str
     }
 
     /**
+     * Perform a regular expression search and replace to the given string.
+     *
+     * @param  string  $search
+     * @param  string  $replace
+     * @param  string  $subject
+     * @return string
+     */
+    public static function preg($search, $replace, $subject)
+    {
+        return preg_replace($search, $replace, $subject);
+    }
+
+    /**
      * Remove any occurrence of the given string in the subject.
      *
      * @param  string|array<string>  $search

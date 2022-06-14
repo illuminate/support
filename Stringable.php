@@ -610,6 +610,18 @@ class Stringable implements JsonSerializable
         return new static(Str::replaceLast($search, $replace, $this->value));
     }
 
+     /**
+     * Replace the last occurrence of a given value in the string.
+     *
+     * @param  string  $search
+     * @param  string  $replace
+     * @return static
+     */
+    public function preg($search, $replace)
+    {
+        return new static(Str::preg($search, $replace, $this->value));
+    }
+
     /**
      * Replace the patterns matching the given regular expression.
      *
