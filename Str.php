@@ -1039,11 +1039,7 @@ class Str
             return static::$studlyCache[$key];
         }
 
-        $words = explode(' ', static::replace(['-', '_'], ' ', $value));
-
-        $studlyWords = array_map(fn ($word) => static::ucfirst($word), $words);
-
-        return static::$studlyCache[$key] = implode($studlyWords);
+        return static::$studlyCache[$key] = lcfirst(ucwords($value, '_'))
     }
 
     /**
@@ -1115,7 +1111,14 @@ class Str
      */
     public static function lcfirst($string)
     {
-        return static::lower(static::substr($string, 0, 1)).static::substr($string, 1);
+        $length = strlen($string);
+        if($length > 1) {
+            return static::lower(static::substr($string, 0, 1)).static::substr($string, 1);
+        } elseif($length == 1) {
+            return static::lower($string);
+        } else {
+            return $string;
+        }
     }
 
     /**
@@ -1126,7 +1129,14 @@ class Str
      */
     public static function ucfirst($string)
     {
-        return static::upper(static::substr($string, 0, 1)).static::substr($string, 1);
+        $length = strlen($string);
+        if($length > 1) {
+            return static::upper(static::substr($string, 0, 1)).static::substr($string, 1);
+        } elseif($length == 1) {
+            return static::upper($string);
+        } else {
+            return $string;
+        }
     }
 
     /**
