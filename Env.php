@@ -75,20 +75,12 @@ class Env
     {
         return Option::fromValue(static::getRepository()->get($key))
             ->map(function ($value) {
-                switch (strtolower($value)) {
-                    case 'true':
-                    case '(true)':
-                        return true;
-                    case 'false':
-                    case '(false)':
-                        return false;
-                    case 'empty':
-                    case '(empty)':
-                        return '';
-                    case 'null':
-                    case '(null)':
-                        return;
-                }
+                return match (strtolower($value)) {
+                    'true', '(true)' => true,
+                    'false', '(false)' => false,
+                    'empty', '(empty)' => '',
+                    'null', '(null)' => null
+                };
 
                 if (preg_match('/\A([\'"])(.*)\1\z/', $value, $matches)) {
                     return $matches[2];
