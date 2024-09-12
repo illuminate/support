@@ -24,7 +24,8 @@
         "illuminate/contracts": "^12.0",
         "illuminate/macroable": "^12.0",
         "nesbot/carbon": "^2.72.2|^3.0",
-        "voku/portable-ascii": "^2.0"
+        "voku/portable-ascii": "^2.0",
+        "laravel/serializable-closure": "^1.0"
     },
     "conflict": {
         "tightenco/collect": "<5.5.33"
